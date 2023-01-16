@@ -132,6 +132,8 @@ if __name__ == '__main__':
         vector = gpt3_embedding(a)
         info = {'speaker': 'USER', 'time': time(), 'vector': vector, 'message': a, 'uuid': str(uuid4())}
         filename = 'log_%s_USER.json' % time()
+        if not os.path.exists('chat_logs'):
+            os.makedirs('chat_logs')
         save_json('chat_logs/%s' % filename, info)
         #### load conversation
         conversation = load_convo()
@@ -148,4 +150,4 @@ if __name__ == '__main__':
         filename = 'log_%s_RAVEN.json' % time()
         save_json('chat_logs/%s' % filename, info)
         #### print output
-        print('\n\nRAVEN: %s' % output) 
+        print('\n\nRAVEN: %s' % output)
