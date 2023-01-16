@@ -75,6 +75,8 @@ def summarize_memories(memories):  # summarize a block of memories into one payl
     for mem in memories:
         block += '%s: %s\n\n' % (mem['speaker'], mem['message'])
     block = block.strip()
+    if block == '':
+        return '- The conversation has not started yet but is about to begin.'
     prompt = open_file('prompt_notes.txt').replace('<<INPUT>>', block)
     # TODO - do this in the background over time to handle huge amounts of memories
     notes = gpt3_completion(prompt)
